@@ -1,0 +1,22 @@
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/
+
+# ---- Compilación y artefactos (no van al repositorio) ----
+/build/
+/app/build/
+/.gradle/
+/.kotlin/
+*.hprof
+*.apk
+*.aab
+/apk/
+
+# ---- Configuración local de la máquina ----
+local.properties
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# ---- Salidas de las herramientas ----
+/tools/out/
