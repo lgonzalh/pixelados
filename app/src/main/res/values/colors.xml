@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Paleta de la app (UI) - colores alegres y cálidos, alto contraste -->
+    <color name="primary">#FF6B35</color>        <!-- Naranja vibrante -->
+    <color name="primary_variant">#E85D2A</color>
+    <color name="secondary">#4ECDC4</color>       <!-- Turquesa -->
+    <color name="secondary_variant">#3DBDB5</color>
+    <color name="background">#FFF8F0</color>      <!-- Crema cálido -->
+    <color name="surface">#FFFFFF</color>
+    <color name="error">#E53935</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_secondary">#000000</color>
+    <color name="on_background">#2D2D2D</color>
+    <color name="on_surface">#2D2D2D</color>
+    <color name="on_error">#FFFFFF</color>
+    
+    <!-- Colores para la cuadrícula del editor -->
+    <color name="grid_light">#E0E0E0</color>
+    <color name="grid_dark">#BDBDBD</color>
+    
+    <!-- Colores para selección -->
+    <color name="selection_overlay">#804ECDC4</color>
+    <color name="selection_border">#4ECDC4</color>
+
+    <!-- Pantalla de carga -->
+    <color name="splash_background">#FFF8F0</color>
+    <color name="splash_icon_background">#FFE0B2</color>
+</resources>
