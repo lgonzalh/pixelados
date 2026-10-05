@@ -13,6 +13,8 @@
 
 # ---- Configuración local de la máquina ----
 local.properties
+keystore.properties
+/keystore/
 .idea/
 *.iml
 .DS_Store

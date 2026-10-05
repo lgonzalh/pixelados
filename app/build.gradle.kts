@@ -19,6 +19,16 @@ var currentVersionCode = (versionProps.getProperty("versionCode") ?: "1").toInt(
 val currentVersionName = versionProps.getProperty("versionName") ?: "1.0"
 val buildStartTime = System.currentTimeMillis()
 
+// ============ FIRMA DE LA BUILD DE RELEASE ============
+// Las credenciales de firma viven en keystore.properties (ignorado por git) y la
+// llave en keystore/. Si el archivo no existe (otra máquina, CI sin llave), la
+// build de release se firma con la llave de depuración para no romper el build.
+val keystoreProps = Properties().apply {
+    val f = rootProject.file("keystore.properties")
+    if (f.exists()) f.inputStream().use { load(it) }
+}
+val tieneKeystore = !keystoreProps.getProperty("storeFile").isNullOrBlank()
+
 android {
     namespace = "com.pixelados"
     compileSdk = 36
@@ -33,12 +43,33 @@ android {
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+    // La configuracion de firma se declara ANTES de buildTypes porque la build de
+    // release la referencia al configurarse.
+    signingConfigs {
+        if (tieneKeystore) {
+            create("release") {
+                storeFile = rootProject.file(keystoreProps.getProperty("storeFile"))
+                storePassword = keystoreProps.getProperty("storePassword")
+                keyAlias = keystoreProps.getProperty("keyAlias")
+                keyPassword = keystoreProps.getProperty("keyPassword")
+            }
         }
     }
+    buildTypes {
+        release {
+            // R8: reduce y ofusca el código y elimina los recursos sin usar.
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = if (tieneKeystore) {
+                signingConfigs.getByName("release")
+            } else {
+                println(">>> [release] sin keystore.properties: se firma con la llave de depuracion (solo para pruebas)")
+                signingConfigs.getByName("debug")
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -208,4 +239,35 @@ tasks.register("installPixeladosApk") {
 
 tasks.matching { it.name in setOf("assembleDebug") }.configureEach {
     finalizedBy("installPixeladosApk")
+}
+
+// ============ PUBLICACIÓN DE LA BUILD DE RELEASE ============
+// Copia el APK firmado a <raíz>/apk/ con un nombre listo para adjuntar a un
+// GitHub Release: pixelados-<versionName>-<versionCode>-<letra>.apk
+val letrasGriegas = listOf(
+    "alfa", "beta", "gamma", "delta", "epsilon", "zeta", "eta", "theta",
+    "iota", "kappa", "lambda", "mu", "nu", "xi", "omicron", "pi", "rho",
+    "sigma", "tau", "upsilon", "phi", "chi", "psi", "omega"
+)
+
+tasks.register("publicarRelease") {
+    description = "Copia el APK firmado de release a apk/ con nombre listo para publicar"
+    group = "pixelados"
+    doLast {
+        val apk = file("build/outputs/apk/release/pixelados.apk")
+        if (!apk.exists()) {
+            println(">>> [publicarRelease] No se encontró el APK de release en ${apk.path}")
+            return@doLast
+        }
+        val indice = (currentVersionCode - 1).coerceAtLeast(0)
+        val letra = letrasGriegas[indice % letrasGriegas.size]
+        val destino = rootProject.file("apk/pixelados-$currentVersionName-$currentVersionCode-$letra.apk")
+        destino.parentFile.mkdirs()
+        apk.copyTo(destino, overwrite = true)
+        println(">>> [publicarRelease] APK de release listo para publicar: ${destino.path}")
+    }
+}
+
+tasks.matching { it.name == "assembleRelease" }.configureEach {
+    finalizedBy("publicarRelease")
 }
