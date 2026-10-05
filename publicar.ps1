@@ -4,6 +4,9 @@
   Uso:
     .\publicar.ps1 -Mensaje "fix(editor): corrige el zoom con dos dedos" -Archivos app/src/main/java/com/pixelados/ui/components/PixelCanvasView.kt
     .\publicar.ps1 -Mensaje "docs: actualiza el README" -Archivos README.md -Cuerpo "Detalle opcional del cambio"
+    .\publicar.ps1 -Mensaje "fix: dos archivos" -Archivos README.md app/build.gradle.kts
+
+  Los archivos se pueden separar con espacios o comas: -Archivos uno.kt, dos.kt
 
   Si no se pasan archivos, publica lo que ya este preparado con `git add`.
   Con -SinPush se hace solo el commit (para revisarlo antes de subirlo).
@@ -15,6 +18,7 @@
 param(
     [Parameter(Mandatory = $true)][string]$Mensaje,
     [string[]]$Archivos,
+    [Parameter(ValueFromRemainingArguments = $true)][string[]]$ArchivosExtra,
     [string]$Cuerpo = "",
     [switch]$SinPush
 )
@@ -22,8 +26,11 @@ param(
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
 
+# Permite escribir `-Archivos uno.kt dos.kt` (PowerShell los manda como restos)
+$Archivos = @(@($Archivos) + @($ArchivosExtra) | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+
 # 1) Preparar unicamente los archivos de este cambio
-if ($Archivos) {
+if ($Archivos.Count -gt 0) {
     foreach ($ruta in $Archivos) {
         if (-not (Test-Path -LiteralPath $ruta)) {
             Write-Host "No existe: $ruta" -ForegroundColor Red
