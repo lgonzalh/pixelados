@@ -208,7 +208,7 @@ fun AboutScreen(navController: NavController) {
                         }
                         Spacer(Modifier.height(10.dp))
                         Text(
-                            text = "Si quieres conversar sobre un proyecto, una oportunidad laboral o simplemente intercambiar ideas sobre ingeniería de software, puedes escribirme a lgonzalh@outlook.com o conectarte conmigo en LinkedIn o GitHub o por WhatsApp.",
+                            text = "Si quieres conversar sobre un proyecto que tengas en mente, por ejemplo esta app la desarrollé especialmente para mi hijo Juanes, o simplemente intercambiar ideas sobre ingeniería de software, puedes escribirme a lgonzalh@outlook.com o conectarte conmigo en LinkedIn o GitHub o por WhatsApp.",
                             style = MaterialTheme.typography.bodySmall,
                             color = theme.textSecondary,
                             textAlign = TextAlign.Center
