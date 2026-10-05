@@ -154,4 +154,12 @@ categoría y la mascota deben reemplazarse por diseños originales.
 
 ## Licencia
 
-© 2021–2026 Luis Gonzalez. Todos los derechos reservados.
+**© 2021–2026 Luis Gonzalez. Todos los derechos reservados.**
+
+El código fuente, los recursos gráficos y la documentación son propiedad del autor. Se permite instalar y usar
+la aplicación en dispositivos propios con fines personales y no comerciales, y leer y estudiar el código
+publicado; **no** se permite copiarlo, modificarlo, publicarlo, distribuirlo ni usarlo con fines comerciales
+sin autorización previa por escrito.
+
+El texto completo de la licencia está en [LICENSE](LICENSE). Para permisos especiales, colaboraciones o
+licencias comerciales: lgonzalh@outlook.com
