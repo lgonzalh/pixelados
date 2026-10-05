@@ -5,7 +5,7 @@
 ![Android 8.0+](https://img.shields.io/badge/Android-8.0%2B%20(API%2026)-3DDC84?logo=android&logoColor=white)
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.9-7F52FF?logo=kotlin&logoColor=white)
 ![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-Material%203-4285F4?logo=jetpackcompose&logoColor=white)
-![Pruebas](https://img.shields.io/badge/pruebas-26%20unitarias%20%C2%B7%2015%20instrumentadas-success)
+![Pruebas](https://img.shields.io/badge/pruebas-26%20unitarias%20%C2%B7%2016%20instrumentadas-success)
 ![Estado](https://img.shields.io/badge/estado-en%20desarrollo-orange)
 
 Cada cuadro de la cuadrícula es **un píxel del dibujo**, y el lienzo se comporta como el de un editor de
@@ -86,10 +86,10 @@ corre las pruebas instrumentadas y guarda capturas).
 región, reemplazo de color, espejo, geometría del trazo continuo, serialización de los proyectos guardados,
 catálogo de símbolos sin nombres repetidos y estampado de las 149 figuras en los tres estilos.
 
-**15 pruebas instrumentadas** (en dispositivo) verifican la interfaz: pintar una celda, trazo largo, relleno,
+**16 pruebas instrumentadas** (en dispositivo) verifican la interfaz: pintar una celda, trazo largo, relleno,
 deshacer por trazo y tras un relleno, zoom con dos dedos, recorrido completo de la galería de símbolos por
-categoría y estilo, símbolo centrado y colocado al soltar, guardado al salir y apertura de un lienzo guardado
-sin cerrar la app.
+categoría y estilo, símbolo centrado y colocado al soltar, guardado al salir, apertura de un lienzo guardado
+sin cerrar la app y que deshacer al abrir un dibujo guardado no lo borre.
 
 ## Arquitectura
 
