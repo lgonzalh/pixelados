@@ -130,7 +130,8 @@ tools/               generadores del catálogo de símbolos e iconos, y utilidad
 
 ## Roadmap
 
-- Build de **release con R8** (APK mucho más liviano) y publicación del APK en *Releases*.
+- **Publicar el APK en GitHub Releases**: el APK firmado y minificado con R8 ya se genera con
+  `.\gradlew assembleRelease` y queda en `apk/pixelados-<versión>-<código>-<letra>.apk`.
 - **Escalado de los símbolos** según el tamaño del lienzo, para que una figura grande no se recorte en
   lienzos pequeños.
 - Categoría de **criaturas originales** y más figuras en el catálogo.
