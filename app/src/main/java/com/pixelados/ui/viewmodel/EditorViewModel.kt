@@ -164,6 +164,11 @@ class EditorViewModel(
     private suspend fun loadProjectById(id: String) {
         val project = repository.getProject(id) ?: return
         val loaded = project.canvas
+        // El historial ARRANCA en el dibujo cargado: el lienzo vacío con el que
+        // se crea el editor nunca fue un estado de este proyecto, así que
+        // deshacer no puede borrar el trabajo que el usuario abrió.
+        undoStack.clear()
+        redoStack.clear()
         undoStack.add(loaded)
         _canvas.value = loaded
     }
