@@ -11,6 +11,8 @@
 Cada cuadro de la cuadrícula es **un píxel del dibujo**, y el lienzo se comporta como el de un editor de
 escritorio pero con reglas de interacción simples: **un dedo pinta, dos dedos mueven y amplían**.
 
+📦 [Descargar el APK](https://github.com/lgonzalh/pixelados/releases) · 📝 [Novedades por versión](CHANGELOG.md) · 📄 [Licencia](LICENSE)
+
 <img width="250" height="550" alt="Pantalla de Inicio" src="https://github.com/user-attachments/assets/dace1429-3dd7-4fb5-9ee5-4266a3e1a9b3" /><img src="docs/img/03-editor.png" width="250" alt="Editor" /> <img src="docs/img/05-pokemon.png" width="250" alt="Categoría Pokémon" />
 
 ## Qué hace
